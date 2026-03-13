@@ -1,32 +1,35 @@
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbA6wuM_a7PuS4N-LC1gxCJ3RKbmSj11QnWbLq_Qll6xpVaGYQtBNp91RyocYFsZ77UE8JCO703IdS/pub?output=csv"
+const apiURL = "https://script.google.com/macros/s/AKfycbyoNYdvapYQ-pCqV7uu7Y1Dj7B-sod5Q-OqhqI34HzuO1AUvD1xJ2nY0jEhyc2LkY3ZeA/exec"
 
 let allItems = []
 
-fetch(sheetURL)
-.then(res => res.text())
-.then(data => {
+async function loadItems(){
 
-let rows = data.split("\n").slice(1)
+allItems = []
+
+const res = await fetch(sheetURL)
+const text = await res.text()
+
+let rows = text.split("\n").slice(1)
 
 rows.forEach(row => {
 
 let cols = row.split(",")
 
-let item = {
+allItems.push({
 id: cols[0],
 name: cols[1],
 category: cols[2],
 image: cols[3],
-status: cols[4]
-}
-
-allItems.push(item)
+status: cols[4],
+claimedBy: cols[5]
+})
 
 })
 
 render()
 
-})
+}
 
 function render(filter="all"){
 
@@ -48,10 +51,9 @@ div.innerHTML = `
 <img src="images/${item.image}">
 <h3>${item.name}</h3>
 <p>${item.category}</p>
-<button ${item.status==="claimed"?"disabled":""}
-onclick="claim('${item.id}')">
-${item.status==="claimed"?"Claimed":"Claim"}
-</button>
+${item.status==="claimed"
+? `<p>Claimed by ${item.claimedBy}</p>`
+: `<button onclick="claim('${item.id}')">Claim</button>`}
 `
 
 container.appendChild(div)
@@ -60,12 +62,28 @@ container.appendChild(div)
 
 }
 
-function filterItems(category){
-render(category)
+async function claim(id){
+
+const name = prompt("Enter your name to claim this item")
+
+if(!name) return
+
+await fetch(apiURL,{
+method:"POST",
+body: JSON.stringify({
+id:id,
+name:name
+})
+})
+
+loadItems()
+
 }
 
-function claim(id){
-
-alert("Message Brooke to confirm claiming this item.")
-
+function filterItems(cat){
+render(cat)
 }
+
+loadItems()
+
+setInterval(loadItems,10000)
