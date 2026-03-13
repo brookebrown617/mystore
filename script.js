@@ -51,7 +51,8 @@ div.classList.add("claimed")
 div.innerHTML = `
 <img src="images/${item.image}">
 <h3>${item.name}</h3>
-<p>${item.category}</p>
+<p class="category">${item.category}</p>
+<p class="description">${item.description}</p>
 ${item.status==="claimed"
 ? `<p>Claimed by ${item.claimedBy}</p>`
 : `<button onclick="claim('${item.id}')">Claim</button>`}
