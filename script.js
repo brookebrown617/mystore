@@ -7,7 +7,7 @@ async function loadItems(){
 
 allItems = []
 
-const res = await fetch(sheetURL)
+const res = await fetch(sheetURL + "&t=" + new Date().getTime())
 const text = await res.text()
 
 let rows = text.split("\n").slice(1)
