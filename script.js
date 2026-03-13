@@ -5,28 +5,12 @@ let allItems = []
 
 async function loadItems(){
 
-allItems = []
+const res = await fetch(apiURL)
+allItems = await res.json()
 
-const res = await fetch(sheetURL + "&t=" + new Date().getTime())
-const text = await res.text()
+render()
 
-let rows = text.split("\n").slice(1)
-
-rows.forEach(row => {
-
-let cols = row.split(",")
-
-allItems.push({
-id: cols[0],
-name: cols[1],
-category: cols[2],
-image: cols[3],
-status: cols[4],
-claimedBy: cols[5],
-description: cols[6]
-})
-
-})
+}
 
 render()
 
