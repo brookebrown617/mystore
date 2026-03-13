@@ -38,5 +38,10 @@ border-radius:8px;
 }
 
 .claimed{
+opacity:.5;
+pointer-events:none;
+}
+
+.claimed{
 opacity:.4;
 }
