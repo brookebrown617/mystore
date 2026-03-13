@@ -1,5 +1,5 @@
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbA6wuM_a7PuS4N-LC1gxCJ3RKbmSj11QnWbLq_Qll6xpVaGYQtBNp91RyocYFsZ77UE8JCO703IdS/pub?output=csv"
-const apiURL = "https://script.google.com/macros/s/AKfycbyoNYdvapYQ-pCqV7uu7Y1Dj7B-sod5Q-OqhqI34HzuO1AUvD1xJ2nY0jEhyc2LkY3ZeA/exec"
+const apiURL = "https://script.google.com/macros/s/AKfycbyHcOEZMIApJ1cdz7rxHuAgj2HoVdZ7PW-HyLuYMiyKBkzeWWZmiCPF6VNP8hOKzaGYIQ/exec"
 
 let allItems = []
 
