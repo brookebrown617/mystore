@@ -22,7 +22,8 @@ name: cols[1],
 category: cols[2],
 image: cols[3],
 status: cols[4],
-claimedBy: cols[5]
+claimedBy: cols[5],
+description: cols[6]
 })
 
 })
